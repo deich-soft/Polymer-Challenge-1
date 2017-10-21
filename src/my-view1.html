@@ -1,0 +1,131 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+
+<link rel="import" href="shared-styles.html">
+
+
+<dom-module id="my-view1">
+    
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+
+        padding: 10px;
+      }
+    </style>
+      <style is="custom-style">
+  #container {
+    display: flex;
+  }
+  paper-button {
+    font-family: 'Roboto', 'Noto', sans-serif;
+    font-weight: normal;
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+  }
+  paper-button.pink {
+    color: var(--paper-pink-a200);
+    --paper-button-ink-color: var(--paper-pink-a200);
+  }
+  paper-button.pink:hover {
+    background-color: var(--paper-pink-100);
+  }
+  paper-button.indigo {
+    background-color: var(--paper-indigo-500);
+    color: white;
+    --paper-button-raised-keyboard-focus: {
+      background-color: var(--paper-pink-a200) !important;
+      color: white !important;
+    };
+  }
+  paper-button.indigo:hover {
+    background-color: var(--paper-indigo-400);
+  }
+  paper-button.green {
+    background-color: var(--paper-green-500);
+    color: white;
+  }
+  paper-icon-button.green {
+    background-color: var(--paper-green-500);
+    color: white;
+  }
+  paper-button.disabled {
+    color: white;
+  }
+</style>
+
+    <div class="card">
+      <div class="circle">-</div>
+      <h1>First Name:</h1>
+      <paper-input id="fn" value="{{firstname}}"required>
+      </paper-input>
+      <h1>Last Name:</h1>
+      <paper-input id="ln" value="{{lastname}}" required>
+      </paper-input>
+      <h1>Email :</h1>
+      <paper-input id="em" value="{{email}}" type="email" error-message="invalid email!" required>
+      </paper-input>
+      <paper-button raised class="green" on-click="_enter">REGISTER</paper-button>
+
+    </div>
+  </template>
+
+  <script>
+    class MyView1 extends Polymer.Element {
+      static get is() { return 'my-view1'; }
+      static get properties() {
+        return {
+          firstname: {
+            type: String
+          },
+          lastname: {
+            type: String
+          },
+          email: {
+            type: String
+          },
+            
+          
+        };
+      }
+        
+      _enter(event) {
+          console.log("i fired!");
+          
+          if(this.firstname == ""){
+              alert('First Name Empty');
+          }
+          else if(this.lastname == ""){
+              
+              alert('Last Name Empty');
+          }
+          else if(this.email == ""){
+              
+              alert('Email Name Empty');
+          }
+          else{
+              this.dispatchEvent(new CustomEvent('submit', {detail:{fn:this.firstname,ln:this.lastname,em:this.email}, bubbles: true, composed: true}));
+              this.firstname ="";
+              this.lastname="";
+              this.email="";
+         }
+         }
+    }
+
+    window.customElements.define(MyView1.is, MyView1);
+  </script>
+</dom-module>

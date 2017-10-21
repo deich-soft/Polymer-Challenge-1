@@ -1,0 +1,56 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="my-new-view">
+  <!-- Defines the element's style and local DOM -->
+  <template>
+      
+    <style include="shared-styles">
+      :host {
+        display: block;
+
+        padding: 16px;
+      }
+    </style>
+    <div class="card">
+      <div class="circle">0</div>
+        
+      <h1>First Name: [[firstname]]</h1>
+      <h1>Last Name: [[lastname]]</h1>
+      <h1>Email: [[email]]</h1>    
+    </div>
+  </template>
+  <script>
+    // Your new element extends the Polymer.Element base class
+    class MyNewView extends Polymer.Element {
+      static get is() { return 'my-new-view'; }
+        static get properties() {
+        return {
+          firstname: {
+            type: String
+          },
+          lastname: {
+            type: String
+          },
+          email: {
+            type: String
+          },
+
+            };
+
+        }
+    }
+    //Now, register your new custom element so the browser can use it
+    customElements.define(MyNewView.is, MyNewView);
+  </script>
+</dom-module>
